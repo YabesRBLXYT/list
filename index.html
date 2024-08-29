@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Default Title</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .button-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .button-list li {
+            margin-bottom: 15px;
+        }
+        .button {
+            display: block;
+            padding: 15px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .description {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="page-title">Default Title</h1>
+        <ul class="button-list" id="button-list">
+            <li>There's nothing here.</li>
+        </ul>
+    </div>
+
+    <script>
+        // Fungsi untuk memuat data dari database.json berdasarkan hash
+        async function loadData(hash) {
+            const response = await fetch('database.json');
+            const data = await response.json();
+            const buttonList = document.getElementById('button-list');
+            const pageTitle = document.getElementById('page-title');
+
+            // Hapus konten sebelumnya
+            buttonList.innerHTML = '';
+            pageTitle.textContent = 'Default Title';
+
+            // Temukan halaman yang sesuai dengan hash
+            const page = data.pages.find(page => page.hash === hash);
+            
+            if (page) {
+                // Atur judul halaman
+                document.title = page.title;
+                pageTitle.textContent = page.title;
+
+                page.buttons.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `
+                        <a href="${item.url}" class="button">${item.name}</a>
+                        <div class="description">${item.description}</div>
+                    `;
+                    buttonList.appendChild(listItem);
+                });
+            } else {
+                buttonList.innerHTML = '<li>There\'s nothing here.</li>';
+            }
+        }
+
+        // Fungsi untuk mendapatkan hash dari URL
+        function getHash() {
+            const hash = window.location.hash.substring(1); // Menghapus '#'
+            return hash || 'test'; // Default hash
+        }
+
+        // Muat data saat halaman dimuat
+        window.onload = () => loadData(getHash());
+
+        // Muat data saat hash berubah
+        window.onhashchange = () => loadData(getHash());
+    </script>
+</body>
+  </html>
+  
