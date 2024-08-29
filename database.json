@@ -1,0 +1,36 @@
+{
+    "pages": [
+        {
+            "hash": "test",
+            "title": "Judul Halaman Test",
+            "buttons": [
+                {
+                    "name": "Nama Button A",
+                    "url": "https://example.com/linkA",
+                    "description": "Deskripsi singkat untuk button A."
+                },
+                {
+                    "name": "Nama Button B",
+                    "url": "https://example.com/linkB",
+                    "description": "Deskripsi singkat untuk button B."
+                }
+            ]
+        },
+        {
+            "hash": "teet1",
+            "title": "Judul Halaman Teet1",
+            "buttons": [
+                {
+                    "name": "Nama Button X",
+                    "url": "https://example.com/linkX",
+                    "description": "Deskripsi singkat untuk button X."
+                },
+                {
+                    "name": "Nama Button Y",
+                    "url": "https://example.com/linkY",
+                    "description": "Deskripsi singkat untuk button Y."
+                }
+            ]
+        }
+    ]
+}
